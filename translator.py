@@ -8,15 +8,16 @@ headers = {'User-Agent': 'Mozilla/5.0'}  # Presenting itself as browser
 
 language_selected = input()  # taking target language from user
 
+# selecting language to translate from language to translate too
 from_language = ''
 to_language = ''
 if language_selected == 'fr':
-      from_language = 'french'
-      to_language = 'english'
+    from_language = 'french'
+    to_language = 'english'
 
 elif language_selected == 'en':
-      from_language = 'english'
-      to_language = 'french'
+    from_language = 'english'
+    to_language = 'french'
 
 
 print('Type the word you want to translate:')
