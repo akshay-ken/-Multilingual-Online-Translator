@@ -33,6 +33,29 @@ url = f'https://context.reverso.net/translation/{from_language}-{to_language}/{w
 # sending HTTP request as get method with target url and header details
 page = requests.get(url, headers=headers)
 
+print(page.status_code, 'OK')
+
+soup = BeautifulSoup(page.content, 'html.parser')
+
+# translated words
+words = soup.find_all('span', {'class': 'display-term'})
+# translated words examples
+examples = soup.find_all('div', {'class': 'src ltr', 'class': 'trg ltr'})
+
+translations_of_word = []
+
+examples_of_sentences = []
+
+print('Translations')
+
+for word in words:
+    translations_of_word.append(word.text)
+
+for example in examples:
+    examples_of_sentences.append(example.text.strip().replace('\n', '').replace('\r', ''))
+
+print(translations_of_word)
+print(examples_of_sentences)
 
 
 
