@@ -40,26 +40,36 @@ soup = BeautifulSoup(page.content, 'html.parser')
 # translated words
 words = soup.find_all('span', {'class': 'display-term'})
 # translated words examples
-examples = soup.find_all('div', {'class': 'src ltr', 'class': 'trg ltr'})
+examples = soup.find_all('div', {'class': 'example'})
 
 translations_of_word = []
 
 examples_of_sentences = []
 
+# print('Translations')
+#
+# for word in words:
+#    translations_of_word.append(word.text)
+#
+# for example in examples:
+#     examples_of_sentences.append(example.text.strip().replace('\n', '').replace('\r', ''))
+#
+# print(translations_of_word)
+# print(examples_of_sentences)
+
 print('Translations')
 
 for word in words:
-    translations_of_word.append(word.text)
+    translations_of_word.append(word.text.strip())
 
 for example in examples:
-    examples_of_sentences.append(example.text.strip().replace('\n', '').replace('\r', ''))
+    source, target = example.find_all('span', {'class': 'text'})
+    source_text = source.text.strip().replace('\n', '').replace('\r', '')
+    target_text = target.text.strip().replace('\n', '').replace('\r', '')
+    examples_of_sentences = examples_of_sentences + [source_text, target_text]
 
+# for index, (source_text, target_text) in enumerate(examples_of_sentences):
+#     print(f'{index+1}. {source_text}')
+#     print(f'   {target_text}')
 print(translations_of_word)
 print(examples_of_sentences)
-
-
-
-
-
-
-
